@@ -1,0 +1,22 @@
+---
+title: "Schuykill River Kayak Trip Plan"
+author: "Kevin"
+date: "28 August 2017"
+---
+
+##Leaftlet map of where to leave cars, and exit river for kayak trip
+```{r}
+library(leaflet)
+portage_points <- data.frame(lat = c(40.144588,40.110582, 40.109722),
+                 long = c(-75.508616, -75.428506, -75.425944))
+markers <- c("Starting Point, Enter river here", "Get off river here", "Leave car here before starting")
+icons <- makeIcon(iconUrl = ifelse(portage_points$long == -75.428506,
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGQp3KDIZYBZCBPjPFwp5Lu3FsTm5JAr2QqUIXWd5W2-dTOg60",
+                  "https://cdn0.iconfinder.com/data/icons/vehicle-1/48/8-128.png"),
+                  iconWidth = 30, iconHeight = 30, iconAnchorX = 30, iconAnchorY = 30)
+
+portage_points %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(icon = icons, popup = markers)
+```
